@@ -1,0 +1,19 @@
+remote_theme: pmarsceill/just-the-docs
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+title: "PHP Package Skeleton"
+description: "PHP Package Skeleton is a PHP package skeleton template."
+url: "https://norse-blue.github.io"
+baseurl: "/php-package-skeleton/"
+permalink: pretty
+search_enabled: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "PHP PAckage Skeleton on GitHub":
+    - "//github.com/norse-blue/php-skeleton"
+
+# Google Analytics
+ga_tracking:

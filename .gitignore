@@ -1,0 +1,20 @@
+# Folders
+/.codeintel
+/.idea
+/.phpintel
+/.vagrant
+/.vscode
+/build
+/coverage
+/docs/.sass-cache
+/docs/_site
+/node_modules
+/vendor
+
+# Files
+*.sublime-workspace
+.phpcs.xml
+.phpunit.result.cache
+composer.lock
+phpunit.xml
+phpstan.neon

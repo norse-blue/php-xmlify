@@ -1,0 +1,67 @@
+{
+    "name": "norse-blue/package-skeleton",
+    "description": "",
+    "keywords": [
+    ],
+    "homepage": "https://norse.blue/open-source/php-package-skeleton",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/norse-blue/php-package-skeleton/issues",
+        "source": "https://github.com/norse-blue/php-package-skeleton"
+    },
+    "authors": [
+        {
+            "name": "Axel Pardemann",
+            "email": "axel.pardemann@norse.blue"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "nunomaduro/phpinsights": "^2.0",
+        "pestphp/pest": "^1.12",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "NorseBlue\\PackageSkeleton\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NorseBlue\\PackageSkeleton\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyze": "phpstan analyze --ansi",
+        "analyze:github": "phpstan analyze --error-format=github",
+        "check": [
+            "@style:check",
+            "@test",
+            "@analyze"
+        ],
+        "check:coverage": [
+            "@style:check",
+            "@test:coverage",
+            "@analyze"
+        ],
+        "style:check": "phpcs",
+        "style:fix": "phpcbf || phpcs",
+        "test": "pest --colors=always",
+        "test:coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "pest --colors=always --coverage-text --coverage-clover=./build/coverage.xml --coverage-html=./build/coverage"
+        ]
+    }
+}
