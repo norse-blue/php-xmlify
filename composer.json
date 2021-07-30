@@ -1,13 +1,22 @@
 {
-    "name": "norse-blue/package-skeleton",
+    "name": "norse-blue/xmlify",
     "description": "",
     "keywords": [
+        "content",
+        "convert",
+        "data",
+        "extract",
+        "map",
+        "mapper",
+        "parser",
+        "utilities",
+        "xml"
     ],
-    "homepage": "https://norse.blue/open-source/php-package-skeleton",
+    "homepage": "https://norse.blue/open-source/php-xmlify",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/norse-blue/php-package-skeleton/issues",
-        "source": "https://github.com/norse-blue/php-package-skeleton"
+        "issues": "https://github.com/norse-blue/php-xmlify/issues",
+        "source": "https://github.com/norse-blue/php-xmlify"
     },
     "authors": [
         {
@@ -35,12 +44,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NorseBlue\\PackageSkeleton\\": "src/"
+            "NorseBlue\\Xmlify\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NorseBlue\\PackageSkeleton\\Tests\\": "tests/"
+            "NorseBlue\\Xmlify\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -56,6 +65,8 @@
             "@test:coverage",
             "@analyze"
         ],
+        "insights": "phpinsights --no-interaction",
+        "insights:summary": "phpinsights --no-interaction --summary",
         "style:check": "phpcs",
         "style:fix": "phpcbf || phpcs",
         "test": "pest --colors=always",

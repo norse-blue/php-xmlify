@@ -2,7 +2,7 @@
 layout: default
 title: Home
 nav_order: 1
-description: PHP Package Skeleton is a PHP package skeleton template.
+description: PHP Xmlify is a PHP Xmlify template.
 permalink: /
 ---
 
@@ -17,14 +17,14 @@ permalink: /
 
 ---
 
-**PHP Package Skeleton** is a PHP package skeleton template.
+**PHP Xmlify** is a PHP Xmlify template.
 
 ## Installation
 
 The most straightforward way to install this package is by using [Composer](https://getcomposer.org):
 
 ```bash
-composer require norse-blue/package-skeleton
+composer require norse-blue/xmlify
 ```
 
 ## Usage

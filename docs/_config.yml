@@ -3,16 +3,16 @@ plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
 
-title: "PHP Package Skeleton"
-description: "PHP Package Skeleton is a PHP package skeleton template."
+title: "PHP Xmlify"
+description: "PHP Xmlify is a PHP Xmlify template."
 url: "https://norse-blue.github.io"
-baseurl: "/php-package-skeleton/"
+baseurl: "/php-xmlify/"
 permalink: pretty
 search_enabled: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "PHP PAckage Skeleton on GitHub":
+  "PHP Xmlify on GitHub":
     - "//github.com/norse-blue/php-skeleton"
 
 # Google Analytics
