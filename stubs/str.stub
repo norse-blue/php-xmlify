@@ -1,13 +1,7 @@
 <?php
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Stringable;
-
 /**
  * @param mixed $string
- * @return Stringable
+ * @return Illuminate\Support\Stringable
  */
-function str($string = null)
-{
-    return Str::of($string);
-}
+function str($string) { }
