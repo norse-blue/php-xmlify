@@ -32,8 +32,12 @@
         "sort-packages": true,
         "optimize-autoloader": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "pestphp/pest-plugin": true
+        }
+    },
+    "extra" : {
+        "branch-alias": {
+            "dev-develop": "1.x-dev"
         }
     },
     "require": {
