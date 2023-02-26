@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Book id="42" slug="the-ultimate-hitchhikers-guide-to-the-galaxy">
+    <name>The Ultimate Hitchhiker's Guide to the Galaxy</name>
+    <author>Douglas Adams</author>
+    <genre>Science Fiction</genre>
+    <publication isbn10="0345453743" isbn13="9780345453747">
+        <date>2002-04-30</date>
+        <publisher>Del Rey Books</publisher>
+        <edition xsi:nil="true" />
+        <language>english</language>
+        <type>paperback</type>
+        <pages>815</pages>
+    </publication>
+    <summary>
+        <![CDATA[In one complete volume, here are the five classic novels from Douglas Adams’s beloved Hitchhiker series.
+
+        Now celebrating the pivotal 42nd anniversary of The Hitchhiker’s Guide to the Galaxy, soon to be a Hulu original series!
+
+        The Hitchhiker’s Guide to the Galaxy (Nominated as one of America’s best-loved novels by PBS’s The Great American Read)
+        Seconds before the Earth is demolished for a galactic freeway, Arthur Dent is saved by Ford Prefect, a researcher for the revised Guide. Together they stick out their thumbs to the stars and begin a wild journey through time and space.
+
+        The Restaurant at the End of the Universe
+        The moment before annihilation at the hands of warmongers is a curious time to crave tea. It could only happen to the cosmically displaced Arthur Dent and his comrades as they hurtle across the galaxy in a desperate search for a place to eat.
+
+        Life, the Universe and Everything
+        The unhappy inhabitants of planet Krikkit are sick of looking at the night sky– so they plan to destroy it. The universe, that is. Now only five individuals can avert Armageddon: mild-mannered Arthur Dent and his stalwart crew.
+
+        So Long, and Thanks for All the Fish
+        Back on Earth, Arthur Dent is ready to believe that the past eight years were all just a figment of his stressed-out imagination. But a gift-wrapped fishbowl with a cryptic inscription thrusts him back to reality. So to speak.
+
+        Mostly Harmless
+        Just when Arthur Dent makes the terrible mistake of starting to enjoy life, all hell breaks loose. Can he save the Earth from total obliteration? Can he save the Guide from a hostile alien takeover? Can he save his daughter from herself?
+
+        Includes the bonus story “Young Zaphod Plays It Safe”
+
+        “With droll wit, a keen eye for detail and heavy doses of insight . . . Adams makes us laugh until we cry.”—San Diego Union-Tribune
+
+        “Lively, sharply satirical, brilliantly written . . . ranks with the best set pieces in Mark Twain.”—The Atlantic]]>
+    </summary>
+    <urls>
+        <url>https://www.amazon.com/Ultimate-Hitchhikers-Guide-Galaxy/dp/0345453743</url>
+        <url>https://www.barnesandnoble.com/w/ultimate-hitchhikers-guide-to-the-galaxy-douglas-adams/1100618535</url>
+    </urls>
+</Book>

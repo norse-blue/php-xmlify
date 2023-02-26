@@ -1,33 +1,35 @@
-name: analyze-code
+name: static-analysis
 
 on:
   push:
     paths:
       - '**.php'
+      - '**.stub'
       - 'phpstan.neon.dist'
   pull_request:
     paths:
       - '**.php'
+      - '**.stub'
       - 'phpstan.neon.dist'
 
 jobs:
-  analyze-code:
+  phpstan:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [8.0]
+        php: [8.2]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: bcmath, curl, dom, exif, fileinfo, gd, iconv, imagick, intl, libxml, mbstring, pcntl, pdo, pdo_sqlite, soap, sqlite, tidy, zip
 
       - name: Install dependencies
-        run: composer update --prefer-dist --no-interaction --no-suggest
+        run: composer update --prefer-dist --no-interaction
 
       - name: Analyze code
-        run: composer analyze:github
+        run: composer stan:github

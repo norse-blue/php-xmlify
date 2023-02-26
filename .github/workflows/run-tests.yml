@@ -1,27 +1,32 @@
 name: run-tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  run-tests:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [8.0]
-        dependency-version: [prefer-lowest, prefer-stable]
-    name: PHP${{ matrix.php }}-${{ matrix.dependency-version }}-${{ matrix.os }}
+        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        php: [8.2]
+        stability: [prefer-stable, prefer-lowest]
+
+    name: ${{ matrix.os }}_PHP-${{ matrix.php }}_${{ matrix.dependency-version }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: bcmath, curl, dom, exif, fileinfo, gd, iconv, imagick, intl, libxml, mbstring, pcntl, pdo, pdo_sqlite, soap, sqlite, tidy, zip
           coverage: xdebug
 
       - name: Setup problem matchers for PHP
@@ -30,24 +35,28 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
-        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: List Installed Dependencies
+        run: composer show --direct
 
       - name: Run tests with coverage
         run: composer test:coverage
 
       - name: Upload coverage to CodeClimate
-        if: "!startsWith(matrix.os, 'windows')"
-        uses: paambaati/codeclimate-action@v2.7.4
+        if: "startsWith(matrix.os, 'ubuntu')"
+        uses: paambaati/codeclimate-action@v3.2.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageLocations: ${{github.workspace}}/build/coverage.xml:clover
+          coverageLocations: ${{ github.workspace }}/build/coverage.xml:clover
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        if: "startsWith(matrix.os, 'ubuntu')"
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ${{github.workspace}}/build/coverage.xml
-          env_vars: ${{ matrix.os }},PHP{{ matrix.php }}
-          name: PHP${{ matrix.php }}-${{ matrix.dependency-version }}-${{ matrix.os }}
+          file: ${{ github.workspace }}/build/coverage.xml
+          env_vars: OS,PHP
+          name: ${{ jobs.test.name }}
           fail_ci_if_error: false

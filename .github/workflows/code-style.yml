@@ -1,4 +1,4 @@
-name: fix-style
+name: code-style
 
 on: [push]
 
@@ -7,28 +7,27 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [8.0]
+        php: [8.2]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: bcmath, curl, dom, exif, fileinfo, gd, iconv, imagick, intl, libxml, mbstring, pcntl, pdo, pdo_sqlite, soap, sqlite, tidy, zip
 
       - name: Install dependencies
-        run: composer update --prefer-dist --no-interaction --no-suggest
-
-      - name: Check style
-        run: composer style:check
+        run: composer update --prefer-dist --no-interaction
 
       - name: Fix style
-        run: composer style:fix
+        run: composer pint
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Fix styling
+          commit_message: Fix code styling
