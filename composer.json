@@ -1,6 +1,6 @@
 {
     "name": "norse-blue/xmlify",
-    "description": "",
+    "description": "PHP Xmlify is a package that allows you to handle XML serialization for your objects using PHP Attributes.",
     "keywords": [
         "content",
         "convert",
@@ -9,6 +9,7 @@
         "map",
         "mapper",
         "parser",
+        "serialization",
         "utilities",
         "xml"
     ],
@@ -38,9 +39,9 @@
     "require": {
         "php": "^8.2",
         "ext-dom": "*",
-        "ext-tidy" : "*",
-        "illuminate/collections": "^10.0",
-        "illuminate/support": "^10.0"
+        "ext-tidy": "*",
+        "illuminate/collections": "^10.1",
+        "illuminate/support": "^10.1"
     },
     "require-dev": {
         "laravel/pint": "^1.6",

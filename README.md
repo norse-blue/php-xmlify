@@ -1,23 +1,23 @@
 <div align="center">
     <h1>PHP Xmlify</h1>
     <p align="center">
-        <a href="https://packagist.org/packages/norse-blue/xmlify"><img alt="Stable Release" src="https://img.shields.io/packagist/v/norse-blue/xmlify.svg?style=flat-square&label=release&logo=packagist&logoColor=eceff4&colorA=4c566a&colorB=5e81ac"></a>
-        <a href="https://github.com/norse-blue/php-xmlify/actions?query=workflow%3Arun-tests"><img alt="Build Status" src="https://img.shields.io/github/workflow/status/norse-blue/php-xmlify/run-tests.svg?style=flat-square&label=build&logo=github&logoColor=eceff4&colorA=4c566a&colorB=88c0d0"></a>
-        <a href="https://php.net/releases"><img alt="PHP Version" src="https://img.shields.io/packagist/php-v/norse-blue/xmlify.svg?style=flat-square&label=php&logo=php&logoColor=eceff4&colorA=4c566a&colorB=b48ead"></a>
-        <a href="https://codecov.io/gh/norse-blue/php-xmlify"><img alt="Test Coverage" src="https://img.shields.io/codecov/c/github/norse-blue/php-xmlify.svg?style=flat-square&label=coverage&logo=codecov&logoColor=eceff4&colorA=4c566a&colorB=88c0d0"></a>
-        <a href="https://codeclimate.com/github/norse-blue/php-xmlify"><img alt="Maintainability" src="https://img.shields.io/codeclimate/maintainability/norse-blue/php-xmlify.svg?style=flat-square&label=maintainability&logo=code-climate&logoColor=eceff4&colorA=4c566a&colorB=88c0d0"></a>
-        <a href="https://packagist.org/packages/norse-blue/xmlify"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/norse-blue/xmlify.svg?style=flat-square&label=downloads&logoColor=eceff4&colorA=4c566a&colorB=88c0d0"></a>
-        <a href="https://github.com/norse-blue/php-xmlify/blob/master/LICENSE.md"><img alt="License" src="https://img.shields.io/github/license/norse-blue/php-xmlify.svg?style=flat-square&label=license&logoColor=eceff4&colorA=4c566a&colorB=a3be8c"></a>
+        <a href="https://packagist.org/packages/norse-blue/xmlify"><img alt="Stable Release" src="https://img.shields.io/packagist/v/norse-blue/xmlify.svg?style=flat-square&label=release&logo=packagist&logoColor=eceff4&labelColor=4c566a&color=5e81ac"></a>
+        <a href="https://github.com/norse-blue/php-xmlify/actions?query=workflow%3Arun-tests"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/norse-blue/php-xmlify/run-tests.yml.svg?branch=main&style=flat-square&label=build&logo=github&logoColor=eceff4&labelColor=4c566a&color=88c0d0"></a>
+        <a href="https://php.net/releases"><img alt="PHP Version" src="https://img.shields.io/packagist/php-v/norse-blue/xmlify.svg?style=flat-square&label=php&logo=php&logoColor=eceff4&labelColor=4c566a&color=b48ead"></a>
+        <a href="https://codecov.io/gh/norse-blue/php-xmlify"><img alt="Test Coverage" src="https://img.shields.io/codecov/c/github/norse-blue/php-xmlify.svg?style=flat-square&label=coverage&logo=codecov&logoColor=eceff4&labelColor=4c566a&color=88c0d0"></a>
+        <a href="https://codeclimate.com/github/norse-blue/php-xmlify"><img alt="Maintainability" src="https://img.shields.io/codeclimate/maintainability/norse-blue/php-xmlify.svg?style=flat-square&label=maintainability&logo=code-climate&logoColor=eceff4&labelColor=4c566a&color=88c0d0"></a>
+        <a href="https://packagist.org/packages/norse-blue/xmlify"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/norse-blue/xmlify.svg?style=flat-square&label=downloads&logoColor=eceff4&labelColor=4c566a&color=88c0d0"></a>
+        <a href="https://github.com/norse-blue/php-xmlify/blob/master/LICENSE.md"><img alt="License" src="https://img.shields.io/github/license/norse-blue/php-xmlify.svg?style=flat-square&label=license&logoColor=eceff4&labelColor=4c566a&color=a3be8c"></a>
     </p>
 </div>
 <hr>
 
-**PHP Xmlify** is a PHP Xmlify template.
+**PHP Xmlify** is a package that allows you to handle XML serialization for your objects using PHP Attributes.
 
 ## Installation
 
 >Requirements:
->- [PHP 8.0+](https://php.net/releases)
+>- [PHP 8.2+](https://php.net/releases)
 
 Install this package using Composer:
 
