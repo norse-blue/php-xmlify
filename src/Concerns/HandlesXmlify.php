@@ -6,14 +6,8 @@ namespace NorseBlue\Xmlify\Concerns;
 
 use DOMDocument;
 use DOMException;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Pluralizer;
-use NorseBlue\Xmlify\Contracts\Xmlifiable;
-use NorseBlue\Xmlify\DataMapper;
-use NorseBlue\Xmlify\DataMappings\AttributeDataMapping;
-use NorseBlue\Xmlify\DataMappings\ElementDataMapping;
-use NorseBlue\Xmlify\Enums\DataMapperTarget;
 use NorseBlue\Xmlify\Enums\ToXmlOption;
+use NorseBlue\Xmlify\XmlifyHandler;
 use ReflectionException;
 
 trait HandlesXmlify
@@ -57,90 +51,15 @@ trait HandlesXmlify
      */
     public function ToXmlDom(): DOMDocument
     {
-        $mappings = DataMapper::for(static::class)->mappings();
+        $handler = new XmlifyHandler($this);
 
-        // TODO: add support for using XML Namespaces?
-
-        // Create DOMDocument with XML Root Node
-        $dom = new DOMDocument();
-        $dom->encoding = 'UTF-8';
-        $dom->appendChild($dom->createElement($mappings[DataMapperTarget::Root->value]->target_name->value()));
-
-        // Add XML Attributes
-        $mappings[DataMapperTarget::Attribute->value]->each(function (AttributeDataMapping $mapping) use ($dom) {
-            $attribute = $mapping->value->call($this, $mapping->source_name);
-
-            // Attribute is null
-            if ($attribute === null) {
-                return;
-            }
-
-            // Attribute is Stringable
-            $attribute_node = $dom->createAttribute($mapping->target_name->value());
-            $attribute_node->nodeValue = $attribute->value();
-            $dom->documentElement->appendChild($attribute_node);
-        });
-
-        // Add XML Elements
-        $mappings[DataMapperTarget::Element->value]->each(function (ElementDataMapping $mapping) use ($dom) {
-            $element = $mapping->value->call($this, $mapping->source_name);
-            $element_node = $dom->createElement($mapping->target_name->value());
-
-            // Element is null
-            if ($element === null) {
-                $null_attribute = $dom->createAttribute('xsi:nil');
-                $null_attribute->nodeValue = 'true';
-                $element_node->appendChild($null_attribute);
-                $dom->documentElement->appendChild($element_node);
-
-                return;
-            }
-
-            // Element is a collection
-            if (is_array($element) || $element instanceof Collection) {
-                collect($element)->map(function ($item) use ($mapping, $dom, $element_node) {
-                    $element_item_name = Pluralizer::singular($mapping->target_name);
-
-                    // Item is a Xmlifiable object
-                    if ($item instanceof Xmlifiable) {
-                        $element_item = $item->ToXmlDom()->documentElement;
-                        $element_item->nodeName = $element_item_name;
-                        $element_node->appendChild($dom->importNode($element_item, true));
-
-                        return;
-                    }
-
-                    // Item is any other kind of value
-                    $element_item = $dom->createElement($element_item_name);
-                    $element_item->nodeValue = str($item)->value();
-                    $element_node->appendChild($element_item);
-                });
-
-                $dom->documentElement->appendChild($element_node);
-
-                return;
-            }
-
-            // Element is a Xmlifiable object
-            if ($element instanceof Xmlifiable) {
-                $element_node = $element->ToXmlDom()->documentElement;
-                $dom->documentElement->appendChild($dom->importNode($element_node, true));
-
-                return;
-            }
-
-            // Element is Stringable
-            if ($mapping->asCData) {
-                $element_node->appendChild($dom->createCDATASection($element->value()));
-            } else {
-                $element_node->nodeValue = $element->value();
-            }
-            $dom->documentElement->appendChild($element_node);
-        });
-
-        return $dom;
+        return $handler->run();
     }
 
+    /**
+     * @throws DOMException
+     * @throws ReflectionException
+     */
     public function __toString(): string
     {
         return $this->ToXml();

@@ -55,6 +55,7 @@ class ElementsTargetResolver implements CollectionTargetResolver
     private function createElementDataMapping(ReflectionProperty|ReflectionMethod $reflected): ElementDataMapping
     {
         $attribute = $reflected->getAttributes(AsXmlElement::class, ReflectionAttribute::IS_INSTANCEOF)[0];
+        /** @return array|Collection<int, mixed>|Xmlifiable|Stringable|null */
         $value_resolver = function (bool|int|float|array|string|object|null $value): array|Collection|Xmlifiable|Stringable|null {
             return match (true) {
                 $value === null || $value instanceof Stringable || $value instanceof Xmlifiable || is_array($value) || $value instanceof Collection => $value,
