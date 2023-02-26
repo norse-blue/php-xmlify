@@ -58,5 +58,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ${{ github.workspace }}/build/coverage.xml
           env_vars: OS,PHP
-          name: ${{ jobs.test.name }}
+          name: ${{ matrix.os }}_PHP-${{ matrix.php }}_${{ matrix.dependency-version }}
           fail_ci_if_error: false
