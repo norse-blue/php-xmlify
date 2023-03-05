@@ -1,7 +1,7 @@
 {
-    "name": "norse-blue/xmlify",
-    "description": "PHP Xmlify is a package that allows you to handle XML serialization for your objects using PHP Attributes.",
-    "keywords": [
+    "name" : "norse-blue/xmlify",
+    "description" : "PHP Xmlify is a package that allows you to handle XML serialization for your objects using PHP Attributes.",
+    "keywords" : [
         "content",
         "convert",
         "data",
@@ -13,78 +13,78 @@
         "utilities",
         "xml"
     ],
-    "homepage": "https://norse.blue/open-source/php-xmlify",
-    "license": "MIT",
-    "support": {
-        "issues": "https://github.com/norse-blue/php-xmlify/issues",
-        "source": "https://github.com/norse-blue/php-xmlify"
+    "homepage" : "https://norse.blue/open-source/php-xmlify",
+    "license" : "MIT",
+    "support" : {
+        "issues" : "https://github.com/norse-blue/php-xmlify/issues",
+        "source" : "https://github.com/norse-blue/php-xmlify"
     },
-    "authors": [
+    "authors" : [
         {
-            "name": "Axel Pardemann",
-            "email": "axel.pardemann@norse.blue"
+            "name" : "Axel Pardemann",
+            "email" : "axel.pardemann@norse.blue"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
+    "minimum-stability" : "dev",
+    "prefer-stable" : true,
+    "config" : {
+        "preferred-install" : "dist",
+        "sort-packages" : true,
+        "optimize-autoloader" : true,
+        "allow-plugins" : {
+            "pestphp/pest-plugin" : true
         }
     },
     "extra" : {
-        "branch-alias": {
-            "dev-develop": "1.x-dev"
+        "branch-alias" : {
+            "dev-develop" : "1.x-dev"
         }
     },
-    "require": {
-        "php": "^8.2",
-        "ext-dom": "*",
-        "ext-tidy": "*",
-        "illuminate/collections": "^10.1",
-        "illuminate/support": "^10.1"
+    "require" : {
+        "php" : "^8.2",
+        "ext-dom" : "*",
+        "ext-tidy" : "*",
+        "illuminate/collections" : "^10.1",
+        "illuminate/support" : "^10.1"
     },
-    "require-dev": {
-        "laravel/pint": "^1.6",
-        "nunomaduro/larastan": "^2.4",
-        "orchestra/testbench": "^8.0",
-        "pestphp/pest": "^2.0",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^10.0"
+    "require-dev" : {
+        "laravel/pint" : "^1.6",
+        "nunomaduro/larastan" : "^2.4",
+        "orchestra/testbench" : "^8.0",
+        "pestphp/pest" : "^2.0",
+        "phpstan/phpstan" : "^1.10",
+        "phpunit/phpunit" : "^10.0"
     },
-    "autoload": {
-        "psr-4": {
-            "NorseBlue\\Xmlify\\": "src/"
+    "autoload" : {
+        "psr-4" : {
+            "NorseBlue\\Xmlify\\" : "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "NorseBlue\\Xmlify\\Tests\\": "tests/"
+    "autoload-dev" : {
+        "psr-4" : {
+            "NorseBlue\\Xmlify\\Tests\\" : "tests/"
         }
     },
-    "scripts": {
-        "check": [
+    "scripts" : {
+        "check" : [
             "@pint:check",
             "@test",
             "@stan"
         ],
-        "check:coverage": [
+        "check:coverage" : [
             "@pint:check",
             "@test:coverage",
             "@stan"
         ],
-        "pint": "pint",
-        "pint:check": "pint --test -v",
-        "stan": "phpstan analyze --ansi --xdebug",
-        "stan:github": "phpstan analyze --ansi --xdebug --error-format=github",
-        "test": "pest",
-        "test:coverage": [
+        "pint" : "pint",
+        "pint:check" : "pint --test -v",
+        "stan" : "phpstan analyze --ansi --xdebug",
+        "stan:github" : "phpstan analyze --ansi --xdebug --error-format=github",
+        "test" : "pest",
+        "test:coverage" : [
             "@putenv XDEBUG_MODE=coverage",
             "pest --coverage --coverage-text --coverage-clover=./build/coverage.xml --coverage-html=./build/coverage"
         ],
-        "test:output": "pest --disallow-test-output"
+        "test:output" : "pest --disallow-test-output"
     }
 }
