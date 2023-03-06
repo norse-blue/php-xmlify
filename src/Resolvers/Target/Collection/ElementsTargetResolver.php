@@ -55,6 +55,7 @@ class ElementsTargetResolver implements CollectionTargetResolver
     private function createElementDataMapping(ReflectionProperty|ReflectionMethod $reflected): ElementDataMapping
     {
         $attribute = $reflected->getAttributes(AsXmlElement::class, ReflectionAttribute::IS_INSTANCEOF)[0];
+
         /** @return array|Collection<int, mixed>|Xmlifiable|Stringable|null */
         $value_resolver = function (bool|int|float|array|string|object|null $value): array|Collection|Xmlifiable|Stringable|null {
             return match (true) {
@@ -69,6 +70,11 @@ class ElementsTargetResolver implements CollectionTargetResolver
                 ?? $attribute->getArguments()[0]
                 ?? $reflected->getName()),
 
+            namespace: str($attribute->getArguments()['namespace']
+                ?? $attribute->getArguments()[1]
+                ?? '',
+            ),
+
             source_name: str($reflected->getName()),
 
             source_type: str(DataMapperSource::fromReflection($reflected)->value),
@@ -77,6 +83,10 @@ class ElementsTargetResolver implements CollectionTargetResolver
                 $reflected instanceof ReflectionProperty => Closure::bind(fn (string $property): array|Collection|Xmlifiable|Stringable|null => $value_resolver($this->{$property}), new stdClass()),
                 $reflected instanceof ReflectionMethod => Closure::bind(fn (string $method): array|Collection|Xmlifiable|Stringable|null => $value_resolver($this->{$method}()), new stdClass()),
             },
+
+            namespaces: $attribute->getArguments()['namespaces']
+                ?? $attribute->getArguments()[2]
+                ?? [],
 
             asCData: $attribute->getName() === AsXmlCDataElement::class,
         );

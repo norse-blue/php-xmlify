@@ -11,11 +11,19 @@ use NorseBlue\Xmlify\DataTargets\AsXmlCDataElement;
 use NorseBlue\Xmlify\DataTargets\AsXmlElement;
 use NorseBlue\Xmlify\DataTargets\AsXmlRoot;
 
-#[AsXmlRoot(name: 'Book')]
+#[AsXmlRoot(name: 'Book', namespace: 'book', namespaces: ['book' => 'https://www.example.com/books.xsd'])]
 class Book implements Xmlifiable
 {
     use HandlesXmlify;
 
+    /**
+     * @param  int  $id
+     * @param  string  $name
+     * @param  string  $author
+     * @param  string  $genre
+     * @param  array<string, string>|\NorseBlue\Xmlify\Tests\Types\Publication|null  $publication
+     * @param  array<string>  $urls
+     */
     public function __construct(
         #[AsXmlAttribute]
         public int $id,
@@ -25,11 +33,11 @@ class Book implements Xmlifiable
         public string $author = '',
         #[AsXmlElement]
         public string $genre = '',
-        #[AsXmlElement]
+        #[AsXmlElement(name: 'GetsOverridenByObject')]
         public array|Publication|null $publication = null,
         #[AsXmlCDataElement]
         public string $summary = '',
-        #[AsXmlElement]
+        #[AsXmlElement(namespaces: ['urls-collection' => 'https://www.example.com/urls-collection.xsd'])]
         public array $urls = [],
     ) {
         if (is_array($publication)) {
@@ -38,8 +46,8 @@ class Book implements Xmlifiable
     }
 
     #[AsXmlAttribute(name: 'slug')]
-    public function getSlug()
+    public function getSlug(): string
     {
-        return str($this->name)->slug();
+        return str($this->name)->slug()->value();
     }
 }

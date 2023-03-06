@@ -66,6 +66,11 @@ class AttributesTargetResolver implements CollectionTargetResolver
                 ?? $attribute->getArguments()[0]
                 ?? $reflected->getName()),
 
+            namespace: str($attribute->getArguments()['namespace']
+                ?? $attribute->getArguments()[1]
+                ?? '',
+            ),
+
             source_name: str($reflected->getName()),
 
             source_type: str(DataMapperSource::fromReflection($reflected)->value),
