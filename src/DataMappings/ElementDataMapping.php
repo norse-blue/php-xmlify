@@ -14,6 +14,7 @@ readonly class ElementDataMapping implements DataMapping
 {
     /**
      * @phpstan-param  Closure(string $accessor) : (array<mixed>|Collection<int, mixed>|Xmlifiable|Stringable|null) $value
+     *
      * @param  array<string, string>  $namespaces
      */
     public function __construct(

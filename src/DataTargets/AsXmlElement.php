@@ -13,10 +13,10 @@ use Attribute;
 readonly class AsXmlElement implements AsXmlTarget
 {
     /**
-     * @var array<string, string>  $namespaces
+     * @var array<string, string> 
      */
     public array $namespaces;
-    
+
     /**
      * @param  array<string, string>  $namespaces
      */
