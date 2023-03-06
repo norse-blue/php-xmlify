@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Book id="39" slug="a-song-of-ice-and-fire">
+<book:Book id="39" slug="a-song-of-ice-and-fire" xmlns:book="https://www.example.com/books.xsd">
     <name>A Song of Ice and Fire</name>
     <author>George R. R. Martin</author>
     <genre>Epic Fantasy</genre>
-    <publication isbn10="0553103547" isbn13="9780553103540">
-        <date>1996-08-01</date>
-        <publisher>Bantam</publisher>
-        <edition>1st Edition</edition>
-        <language>english</language>
-        <type>hard-cover</type>
-        <pages>694</pages>
-    </publication>
+    <publication:Publication publication:isbn10="0553103547" publication:isbn13="9780553103540" xmlns:publication="https://www.example.com/publication.xsd">
+        <publication:date>1996-08-01</publication:date>
+        <publication:publisher>Bantam</publication:publisher>
+        <publication:edition>1st Edition</publication:edition>
+        <publication:language>english</publication:language>
+        <publication:type>hard-cover</publication:type>
+        <publication:pages>694</publication:pages>
+    </publication:Publication>
     <summary>
         <![CDATA[NOW THE ACCLAIMED HBO SERIES GAME OF THRONES—THE MASTERPIECE THAT BECAME A CULTURAL PHENOMENON
 
@@ -20,8 +20,8 @@
 
         Meanwhile, across the Narrow Sea, Prince Viserys, heir of the fallen House Targaryen, which once ruled all of Westeros, schemes to reclaim the throne with an army of barbarian Dothraki—whose loyalty he will purchase in the only coin left to him: his beautiful yet innocent sister, Daenerys.]]>
     </summary>
-    <urls>
+    <urls xmlns:urls-collection="https://www.example.com/urls-collection.xsd">
         <url>https://www.amazon.com/-/es/George-R-Martin/dp/0553103547</url>
         <url>https://www.barnesandnoble.com/w/game-of-thrones-george-r-r-martin/1100041703?ean=9780553103540</url>
     </urls>
-</Book>
+</book:Book>

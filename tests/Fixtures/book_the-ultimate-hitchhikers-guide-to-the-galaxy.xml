@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Book id="42" slug="the-ultimate-hitchhikers-guide-to-the-galaxy">
+<book:Book id="42" slug="the-ultimate-hitchhikers-guide-to-the-galaxy" xmlns:book="https://www.example.com/books.xsd">
     <name>The Ultimate Hitchhiker's Guide to the Galaxy</name>
     <author>Douglas Adams</author>
     <genre>Science Fiction</genre>
-    <publication isbn10="0345453743" isbn13="9780345453747">
-        <date>2002-04-30</date>
-        <publisher>Del Rey Books</publisher>
-        <edition xsi:nil="true" />
-        <language>english</language>
-        <type>paperback</type>
-        <pages>815</pages>
-    </publication>
+    <publication:Publication publication:isbn10="0345453743" publication:isbn13="9780345453747" xmlns:publication="https://www.example.com/publication.xsd">
+        <publication:date>2002-04-30</publication:date>
+        <publication:publisher>Del Rey Books</publication:publisher>
+        <publication:edition xsi:nil="true" />
+        <publication:language>english</publication:language>
+        <publication:type>paperback</publication:type>
+        <publication:pages>815</publication:pages>
+    </publication:Publication>
     <summary>
         <![CDATA[In one complete volume, here are the five classic novels from Douglas Adams’s beloved Hitchhiker series.
 
@@ -37,8 +37,8 @@
 
         “Lively, sharply satirical, brilliantly written . . . ranks with the best set pieces in Mark Twain.”—The Atlantic]]>
     </summary>
-    <urls>
+    <urls xmlns:urls-collection="https://www.example.com/urls-collection.xsd">
         <url>https://www.amazon.com/Ultimate-Hitchhikers-Guide-Galaxy/dp/0345453743</url>
         <url>https://www.barnesandnoble.com/w/ultimate-hitchhikers-guide-to-the-galaxy-douglas-adams/1100618535</url>
     </urls>
-</Book>
+</book:Book>

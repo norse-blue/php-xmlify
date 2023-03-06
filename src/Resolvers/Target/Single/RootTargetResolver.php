@@ -26,12 +26,22 @@ class RootTargetResolver implements SingleTargetResolver
      */
     public function resolve(): RootDataMapping
     {
-        $attribute = $this->mapper->reflection()->getAttributes(AsXmlRoot::class)[0] ?? null;
+        $attribute = $this->mapper->reflection()->getAttributes(AsXmlRoot::class)[0];
 
         return new RootDataMapping(
-            target_name: str($attribute?->getArguments()['name']
-                ?? $attribute?->getArguments()[0]
-                ?? $this->mapper->reflection()->getShortName()),
+            target_name: str($attribute->getArguments()['name']
+                ?? $attribute->getArguments()[0]
+                ?? $this->mapper->reflection()->getShortName(),
+            ),
+
+            namespace: str($attribute->getArguments()['namespace']
+                ?? $attribute->getArguments()[1]
+                ?? '',
+            ),
+
+            namespaces: $attribute->getArguments()['namespaces']
+            ?? $attribute->getArguments()[2]
+            ?? []
         );
     }
 }

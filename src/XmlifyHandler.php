@@ -40,8 +40,6 @@ readonly class XmlifyHandler
         $dom = new DOMDocument();
         $dom->encoding = 'utf-8';
 
-        // TODO: add support for using XML Namespaces?
-
         $mappings = $this->mapper->mappings();
 
         $this->processRootMapping($dom, $mappings[DataMapperTarget::Root->value]);
@@ -51,6 +49,15 @@ readonly class XmlifyHandler
         $this->processElementMappings($dom, $mappings[DataMapperTarget::Element->value]);
 
         return $dom;
+    }
+
+    private function buildQualifiedName(RootDataMapping|AttributeDataMapping|ElementDataMapping $mapping): Stringable
+    {
+        if ($mapping->namespace->isEmpty()) {
+            return $mapping->target_name;
+        }
+
+        return $mapping->namespace->append(':', $mapping->target_name);
     }
 
     /**
@@ -70,7 +77,17 @@ readonly class XmlifyHandler
      */
     private function processRootMapping(DOMDocument $dom, RootDataMapping $root_mapping): void
     {
-        $root_element = $dom->createElement($root_mapping->target_name->value());
+        $root_element = ($root_mapping->namespace->isEmpty())
+            ? $dom->createElement($this->buildQualifiedName($root_mapping)->value())
+            : $dom->createElementNS($root_mapping->namespaces[$root_mapping->namespace->value()], $this->buildQualifiedName($root_mapping)->value());
+
+        foreach ($root_mapping->namespaces as $ns => $uri) {
+            $root_element->setAttributeNS(
+                namespace: 'http://www.w3.org/2000/xmlns/',
+                qualifiedName: "xmlns:$ns",
+                value: $uri,
+            );
+        }
 
         $dom->appendChild($root_element);
     }
@@ -99,7 +116,10 @@ readonly class XmlifyHandler
     {
         $rootElement = $this->ensureRootElement($dom);
 
-        $attribute_node = $dom->createAttribute($mapping->target_name->value());
+        $attribute_node = ($mapping->namespace->isEmpty())
+            ? $dom->createAttribute($this->buildQualifiedName($mapping)->value())
+            : $dom->createAttributeNS($dom->lookupNamespaceURI($mapping->namespace->value()), $this->buildQualifiedName($mapping)->value());
+
         $attribute_node->nodeValue = $attribute_value->value();
 
         $rootElement->appendChild($attribute_node);
@@ -114,11 +134,21 @@ readonly class XmlifyHandler
     {
         $element_mappings->each(function (ElementDataMapping $mapping) use ($dom): void {
             $element_value = $mapping->value->call($this->xmlifiable, $mapping->source_name);
-            $element_node = $dom->createElement($mapping->target_name->value());
+            $element_node = ($mapping->namespace->isEmpty())
+                ? $dom->createElement($this->buildQualifiedName($mapping)->value())
+                : $dom->createElementNS($dom->lookupNamespaceURI($mapping->namespace->value()), $this->buildQualifiedName($mapping)->value());
+
+            foreach ($mapping->namespaces as $ns => $uri) {
+                $element_node->setAttributeNS(
+                    namespace: 'http://www.w3.org/2000/xmlns/',
+                    qualifiedName: "xmlns:$ns",
+                    value: $uri,
+                );
+            }
 
             match (true) {
                 $element_value === null => $this->appendNodeElementIsNull($dom, $element_node),
-                $element_value instanceof Xmlifiable => $this->appendNodeElementIsXmlifiable($dom, $element_value),
+                $element_value instanceof Xmlifiable => $this->appendNodeElementIsXmlifiable($dom, $element_value, $mapping),
                 is_array($element_value) || $element_value instanceof Collection => $this->appendNodeElementIsCollection($dom, $element_node, $mapping, $element_value),
                 default => $this->appendNodeElementIsStringable($dom, $element_node, $mapping, $element_value),
             };
@@ -139,13 +169,13 @@ readonly class XmlifyHandler
         $rootElement->appendChild($element_node);
     }
 
-    private function appendNodeElementIsXmlifiable(DOMDocument $dom, Xmlifiable $element_value): void
+    private function appendNodeElementIsXmlifiable(DOMDocument $dom, Xmlifiable $element_value, ElementDataMapping $mapping): void
     {
-        $rootElement = $this->ensureRootElement($dom);
+        $root_element = $this->ensureRootElement($dom);
 
         $element_node = $element_value->ToXmlDom()->documentElement;
         if ($element_node !== null) {
-            $rootElement->appendChild($dom->importNode($element_node, true));
+            $root_element->appendChild($dom->importNode($element_node, true));
         }
     }
 
@@ -159,6 +189,7 @@ readonly class XmlifyHandler
         $rootElement = $this->ensureRootElement($dom);
 
         collect($element_value)->map(function ($item) use ($dom, $element_node, $mapping): void {
+            // TODO: if the parent has a namespace, add that namespace to childs
             $element_item_name = Pluralizer::singular($mapping->target_name);
 
             if ($item instanceof Xmlifiable) {

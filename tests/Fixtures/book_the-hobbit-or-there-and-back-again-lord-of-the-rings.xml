@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Book id="20" slug="the-hobbit-or-there-and-back-again-lord-of-the-rings">
+<book:Book id="20" slug="the-hobbit-or-there-and-back-again-lord-of-the-rings" xmlns:book="https://www.example.com/books.xsd">
     <name>The Hobbit: Or There and Back Again (Lord of the Rings)</name>
     <author>J.R.R. Tolkien</author>
     <genre>Classics</genre>
-    <publication asin="B0079KT81G" isbn10="0345534832">
-        <date>2012-02-15</date>
-        <publisher>William Morrow</publisher>
-        <edition xsi:nil="true" />
-        <language>english</language>
-        <type>kindle</type>
-        <pages>322</pages>
-    </publication>
+    <publication:Publication publication:asin="B0079KT81G" publication:isbn10="0345534832" xmlns:publication="https://www.example.com/publication.xsd">
+        <publication:date>2012-02-15</publication:date>
+        <publication:publisher>William Morrow</publication:publisher>
+        <publication:edition xsi:nil="true" />
+        <publication:language>english</publication:language>
+        <publication:type>kindle</publication:type>
+        <publication:pages>322</publication:pages>
+    </publication:Publication>
     <summary>
         <![CDATA[Now a major motion picture.
 
@@ -18,7 +18,7 @@
 
         A glorious account of a magnificent adventure, filled with suspense and seasoned with a quiet humor that is irresistible . . . All those, young or old, who love a fine adventurous tale, beautifully told, will take The Hobbit to their hearts. -New York Times Book Review.]]>
     </summary>
-    <urls>
+    <urls xmlns:urls-collection="https://www.example.com/urls-collection.xsd">
         <url>https://www.amazon.com/-/es/J-R-R-Tolkien-ebook/dp/B0079KT81G</url>
     </urls>
-</Book>
+</book:Book>
