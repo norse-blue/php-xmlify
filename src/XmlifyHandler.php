@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace NorseBlue\Xmlify;
 
 use DOMDocument;
@@ -57,7 +59,7 @@ readonly class XmlifyHandler
             return $mapping->target_name;
         }
 
-        return $mapping->namespace->append(':', $mapping->target_name);
+        return $mapping->namespace->append(':', $mapping->target_name->value());
     }
 
     /**
@@ -100,7 +102,7 @@ readonly class XmlifyHandler
     private function processAttributeMappings(DOMDocument $dom, Collection $attribute_mappings): void
     {
         $attribute_mappings->each(function (AttributeDataMapping $mapping) use ($dom): void {
-            $attribute_value = $mapping->value->call($this->xmlifiable, $mapping->source_name);
+            $attribute_value = $mapping->value->call($this->xmlifiable, $mapping->source_name->value());
 
             match (true) {
                 $attribute_value === null => false,
@@ -133,7 +135,7 @@ readonly class XmlifyHandler
     private function processElementMappings(DOMDocument $dom, Collection $element_mappings): void
     {
         $element_mappings->each(function (ElementDataMapping $mapping) use ($dom): void {
-            $element_value = $mapping->value->call($this->xmlifiable, $mapping->source_name);
+            $element_value = $mapping->value->call($this->xmlifiable, $mapping->source_name->value());
             $element_node = ($mapping->namespace->isEmpty())
                 ? $dom->createElement($this->buildQualifiedName($mapping)->value())
                 : $dom->createElementNS($dom->lookupNamespaceURI($mapping->namespace->value()), $this->buildQualifiedName($mapping)->value());
@@ -190,7 +192,7 @@ readonly class XmlifyHandler
 
         collect($element_value)->map(function ($item) use ($dom, $element_node, $mapping): void {
             // TODO: if the parent has a namespace, add that namespace to childs
-            $element_item_name = Pluralizer::singular($mapping->target_name);
+            $element_item_name = Pluralizer::singular($mapping->target_name->value());
 
             if ($item instanceof Xmlifiable) {
                 // Item is a Xmlifiable object
