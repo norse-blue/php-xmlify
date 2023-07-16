@@ -10,29 +10,29 @@ use NorseBlue\Xmlify\DataTargets\AsXmlAttribute;
 use NorseBlue\Xmlify\DataTargets\AsXmlElement;
 use NorseBlue\Xmlify\DataTargets\AsXmlRoot;
 
-#[AsXmlRoot('publication')]
+#[AsXmlRoot('Publication', namespace: 'publication', namespaces: ['publication' => 'https://www.example.com/publication.xsd'])]
 class Publication implements Xmlifiable
 {
     use HandlesXmlify;
 
     public function __construct(
-        #[AsXmlAttribute]
+        #[AsXmlAttribute(namespace: 'publication')]
         public string $isbn10,
-        #[AsXmlAttribute]
+        #[AsXmlAttribute(namespace: 'publication')]
         public ?string $isbn13 = null,
-        #[AsXmlAttribute]
+        #[AsXmlAttribute(namespace: 'publication')]
         public ?string $asin = null,
-        #[AsXmlElement]
+        #[AsXmlElement(namespace: 'publication')]
         public string $date = '',
-        #[AsXmlElement]
+        #[AsXmlElement(namespace: 'publication')]
         public string $publisher = '',
-        #[AsXmlElement]
+        #[AsXmlElement(namespace: 'publication')]
         public ?string $edition = null,
-        #[AsXmlElement]
+        #[AsXmlElement(namespace: 'publication')]
         public string $language = '',
-        #[AsXmlElement]
+        #[AsXmlElement(namespace: 'publication')]
         public string $type = '',
-        #[AsXmlElement]
+        #[AsXmlElement(namespace: 'publication')]
         public ?int $pages = null,
     ) {
     }

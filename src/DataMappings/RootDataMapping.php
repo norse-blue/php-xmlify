@@ -9,7 +9,13 @@ use NorseBlue\Xmlify\Contracts\DataMapping;
 
 readonly class RootDataMapping implements DataMapping
 {
-    public function __construct(public Stringable $target_name)
-    {
+    /**
+     * @param  array<string, string>  $namespaces
+     */
+    public function __construct(
+        public Stringable $target_name,
+        public Stringable $namespace,
+        public array $namespaces = [],
+    ) {
     }
 }

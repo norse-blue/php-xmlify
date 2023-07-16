@@ -12,7 +12,17 @@ use Attribute;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_METHOD)]
 readonly class AsXmlAttribute implements AsXmlTarget
 {
-    public function __construct(public ?string $name = null, public ?string $prefix = null)
+    /**
+     * @var array<string, string>
+     */
+    public array $namespaces;
+
+    /**
+     * @param  array<string, string>  $namespaces
+     */
+    public function __construct(public ?string $name = null, public string $namespace = '', array $namespaces = [])
     {
+        ksort($namespaces, SORT_NATURAL);
+        $this->namespaces = $namespaces;
     }
 }

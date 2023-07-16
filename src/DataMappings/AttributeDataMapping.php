@@ -15,6 +15,7 @@ readonly class AttributeDataMapping implements DataMapping
      */
     public function __construct(
         public Stringable $target_name,
+        public Stringable $namespace,
         public Stringable $source_name,
         public Stringable $source_type,
         public Closure $value,

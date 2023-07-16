@@ -53,7 +53,7 @@ class AttributesTargetResolver implements CollectionTargetResolver
     private function createAttributeDataMapping(ReflectionProperty|ReflectionMethod $reflected): AttributeDataMapping
     {
         $attribute = $reflected->getAttributes(AsXmlAttribute::class)[0];
-        $value_resolver = function (bool|int|float|array|string|object|null $value): Stringable|null {
+        $value_resolver = function (bool|int|float|array|string|object|null $value): ?Stringable {
             return match (true) {
                 $value === null || $value instanceof Stringable => $value,
                 is_array($value) || is_object($value) => str(json_encode($value)),
@@ -66,13 +66,18 @@ class AttributesTargetResolver implements CollectionTargetResolver
                 ?? $attribute->getArguments()[0]
                 ?? $reflected->getName()),
 
+            namespace: str($attribute->getArguments()['namespace']
+                ?? $attribute->getArguments()[1]
+                ?? '',
+            ),
+
             source_name: str($reflected->getName()),
 
             source_type: str(DataMapperSource::fromReflection($reflected)->value),
 
             value: match (true) {
-                $reflected instanceof ReflectionProperty => Closure::bind(fn (string $property): Stringable|null => $value_resolver($this->{$property}), new stdClass()),
-                $reflected instanceof ReflectionMethod => Closure::bind(fn (string $method): Stringable|null => $value_resolver($this->{$method}()), new stdClass()),
+                $reflected instanceof ReflectionProperty => Closure::bind(fn (string $property): ?Stringable => $value_resolver($this->{$property}), new stdClass()),
+                $reflected instanceof ReflectionMethod => Closure::bind(fn (string $method): ?Stringable => $value_resolver($this->{$method}()), new stdClass()),
             },
         );
     }
